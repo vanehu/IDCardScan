@@ -9,6 +9,12 @@
 ```
 implementation "com.stone.kuainiugroup:id-card-lib:1.0.0"
 ```
+
+### 注意事项
+
+- Face++ 活体认证，需要绑定 applicationId 做鉴权
+- 外部调用活体时，需要请求网络确认协议，需要在子线程中去发起
+
 ### 权限
 
 ```
