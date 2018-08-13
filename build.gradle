@@ -1,0 +1,62 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion conf.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion conf.minSdkVersion
+        targetSdkVersion conf.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir(['libs'])
+        }
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation "com.android.support:appcompat-v7:$support"
+    testImplementation 'junit:junit:4.12'
+}
+ext {
+    bintrayRepo = 'dsq'
+    bintrayName = 'id-card-lib'
+
+    publishedGroupId = 'com.stone.kuainiugroup'
+    libraryName = 'id-card-lib'
+    artifact = 'id-card-lib'
+
+    libraryVersion = '1.0.0'
+
+    libraryDescription = '身份证扫描，再打包'
+
+    siteUrl = 'https://github.com/xiaqu-stone/IDCardScan'
+    gitUrl = 'https://github.com/xiaqu-stone/IDCardScan.git'
+
+    developerId = 'stone'
+    developerName = 'xiaqu-stone'
+    developerEmail = 'stone.xiaqu@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+apply from: "../install.gradle"
+apply from: "../bintray.gradle"
